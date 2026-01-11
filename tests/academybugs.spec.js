@@ -37,7 +37,7 @@ test.describe('Фінальний набір тестів для AcademyBugs.com
     // Відкриваємо сторінку магазину
     await page.goto('https://academybugs.com/store/all-items/');
 
-    // Знаходимо поле пошуку в сайдбарі за атрибутом name [cite: 276]
+    // Знаходимо поле пошуку в сайдбарі за атрибутом name 
     const searchField = page.locator('#secondary input[name="ec_search"]');
     await searchField.waitFor({ state: 'visible' });
     await searchField.fill('shoes');
@@ -45,13 +45,13 @@ test.describe('Фінальний набір тестів для AcademyBugs.com
     // Натискаємо кнопку пошуку в тому ж блоці
     await page.locator('#secondary input[type="submit"][value="Search"]').click();
 
-    // 1. ЧЕКАЄМО, поки URL зміниться або з'явиться параметр пошуку (вирішує проблему в WebKit)
+    // 1. Чекаємо, поки URL зміниться або з'явиться параметр пошуку (вирішує проблему в WebKit)
     await page.waitForURL(/.*ec_search=shoes/);
     
     // 2. Дочекаємося оновлення мережевої активності
     await page.waitForLoadState('networkidle');
 
-    // 3. ЛОКАТОР: Використовуємо ID #ec_store_product_list, щоб ігнорувати бічну панель
+    // 3. Локатор: Використовуємо ID #ec_store_product_list, щоб ігнорувати бічну панель
     const productTitlesLocator = page.locator('#ec_store_product_list .ec_product_title_type1');
     
     // Додаткове очікування появи результатів на сторінці
